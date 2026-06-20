@@ -92,6 +92,29 @@ A clear positive correlation — professionals with 10+ years earn significantly
 
 ---
 
+## Machine Learning Model
+
+Trained and compared 3 regression models to predict employee salary in SAR.
+
+### Model Comparison
+
+| Model | MAE (SAR) | R² Score |
+|---|---|---|
+| **Random Forest** | **913** | **0.43** |
+| Decision Tree | 1,066 | — |
+| Linear Regression | 1,210 | — |
+| Cross Validation (RF) | 1,134 | — |
+
+> **Best Model: Random Forest** with the lowest prediction error.
+
+### Top Predictive Features
+
+| Rank | Feature | Importance |
+|---|---|---|
+| 1 | Experience | 35% |
+
+---
+
 ## Tools & Stack
 
 | Tool | Purpose |
