@@ -1,6 +1,25 @@
-# Saudi Job Market Analysis — Jadarat Dataset
+<div align="center">
 
-An end-to-end data analytics project exploring the Saudi Arabian job market using listings sourced from the **Jadarat** platform. The project covers data cleaning, exploratory data analysis (EDA) in Python, and an interactive Power BI dashboard.
+# Saudi Job Market Analysis
+
+### Exploratory Data Analysis, Salary Prediction & Interactive Web App on the Jadarat Dataset
+
+[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-F37626?style=for-the-badge&logo=jupyter&logoColor=white)](https://jupyter.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-App-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io/)
+[![Power BI](https://img.shields.io/badge/Power%20BI-Dashboard-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)](https://powerbi.microsoft.com/)
+[![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)](https://pandas.pydata.org/)
+[![scikit-learn](https://img.shields.io/badge/scikit--learn-ML-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white)](https://scikit-learn.org/)
+[![Kaggle](https://img.shields.io/badge/Dataset-Kaggle-20BEFF?style=for-the-badge&logo=kaggle&logoColor=white)](https://www.kaggle.com/datasets/shaykhaaldawsari/jadarat-cleaned-data-csv?resource=download)
+[![Status](https://img.shields.io/badge/Status-Completed-2ea44f?style=for-the-badge)]()
+
+</div>
+
+---
+
+## Overview
+
+An end-to-end data analytics project exploring the Saudi Arabian job market using listings sourced from the **Jadarat** (جدارات) platform. The project covers data cleaning, exploratory data analysis (EDA), salary prediction using machine learning, an interactive Power BI dashboard, and a deployed Streamlit web app.
 
 ---
 
@@ -8,15 +27,38 @@ An end-to-end data analytics project exploring the Saudi Arabian job market usin
 
 ![Jadarat Dashboard](src/dashboard_preview.png)
 
-> **Key Metrics at a Glance**
->
-> | Metric | Value |
-> |---|---|
-> | Total Job Listings | 1,470 |
-> | Average Salary | 5,290 SAR |
-> | Maximum Salary | 35,000 SAR |
-> | Minimum Salary | 3,000 SAR |
-> | Average Experience Required | 1.28 years |
+<div align="center">
+
+| Total Listings | Avg. Salary | Max Salary | Min Salary | Avg. Experience |
+|:---:|:---:|:---:|:---:|:---:|
+| 1,470 | 5,290 SAR | 35,000 SAR | 3,000 SAR | 1.28 yrs |
+
+</div>
+
+---
+
+## Salary Predictor App
+
+An interactive web app built with **Streamlit** that predicts the expected monthly salary based on job inputs using a trained Random Forest model.
+
+![App Preview](src/interface.png)
+
+**Inputs accepted by the app:**
+
+| Input | Type |
+|---|---|
+| Region | Dropdown |
+| City | Dropdown (filtered by region) |
+| Sector | Dropdown |
+| Job Title | Dropdown |
+| Company Size | Dropdown |
+| Years of Experience | Slider (0–12) |
+| Company Type | Radio (Private / Semi-Governmental) |
+
+**Run the app locally:**
+```bash
+streamlit run app.py
+```
 
 ---
 
@@ -28,8 +70,11 @@ jadaratData/
 │   ├── processed_dataset.csv   # final dataset
 │   └── saudi_jobs_cleaned.csv  # intermediate dataset
 ├── src/
-│   └── dashboard_preview.png   # dashboard screenshot
-├── analysis.ipynb              # EDA notebook
+│   ├── dashboard_preview.png   # dashboard screenshot
+│   └── interface.png           # web app screenshot
+├── analysis.ipynb              # EDA & ML notebook
+├── app.py                      # Streamlit salary predictor
+├── model.pkl                   # trained Random Forest pipeline
 ├── jadaratDashboard.pbix       # Power BI dashboard
 └── README.md
 ```
@@ -41,6 +86,10 @@ jadaratData/
 > **Source:** [Jadarat Cleaned Data — Kaggle](https://www.kaggle.com/datasets/shaykhaaldawsari/jadarat-cleaned-data-csv?resource=download)
 
 The processed dataset contains **1,470 rows** and **14 columns** with zero missing values after cleaning.
+
+<details>
+<summary><b>Column Reference</b></summary>
+<br>
 
 | Column | Type | Description |
 |---|---|---|
@@ -59,13 +108,15 @@ The processed dataset contains **1,470 rows** and **14 columns** with zero missi
 | `gender` | int | `0` = Male, `1` = Female, `2` = Both |
 | `Salary` | float | Monthly salary in SAR |
 
+</details>
+
 ---
 
 ## Key Findings
 
 ### Top Job Titles
 | Rank | Job Title | Count |
-|---|---|---|
+|:---:|---|:---:|
 | 1 | Analyst | 235 |
 | 2 | Salesperson | 195 |
 | 3 | Accountant | 128 |
@@ -73,10 +124,11 @@ The processed dataset contains **1,470 rows** and **14 columns** with zero missi
 | 5 | Technician | 112 |
 
 ### Average Salary by Region
+
 **Northern Borders** leads with the highest average at **8,300 SAR**, while Jazan is the lowest at **4,020 SAR**.
 
 | Region | Avg. Salary (SAR) |
-|---|---|
+|---|:---:|
 | Northern Borders | 8,300 |
 | Hail | 6,455 |
 | Tabuk | 6,345 |
@@ -99,18 +151,18 @@ Trained and compared 3 regression models to predict employee salary in SAR.
 ### Model Comparison
 
 | Model | MAE (SAR) | R² Score |
-|---|---|---|
-| **Random Forest** | **913** | **0.43** |
+|---|:---:|:---:|
+| **Random Forest** ✅ | **913** | **0.43** |
 | Decision Tree | 1,066 | — |
 | Linear Regression | 1,210 | — |
 | Cross Validation (RF) | 1,134 | — |
 
-> **Best Model: Random Forest** with the lowest prediction error.
+> **Best Model: Random Forest** — lowest prediction error across all models, saved as `model.pkl` and deployed in the Streamlit app.
 
 ### Top Predictive Features
 
 | Rank | Feature | Importance |
-|---|---|---|
+|:---:|---|:---:|
 | 1 | Experience | 35% |
 
 ---
@@ -119,17 +171,25 @@ Trained and compared 3 regression models to predict employee salary in SAR.
 
 | Tool | Purpose |
 |---|---|
-| Python (pandas, numpy) | Data cleaning & transformation |
-| Matplotlib / Seaborn | Exploratory visualizations |
+| Python · pandas · NumPy | Data cleaning & transformation |
+| Matplotlib · Seaborn | Exploratory visualizations |
+| scikit-learn | Machine learning models |
+| Streamlit | Interactive salary predictor web app |
 | Power BI | Interactive dashboard |
 
 ---
 
 ## How to Run
 
+**Salary Predictor App**
+```bash
+pip install streamlit pandas scikit-learn
+streamlit run app.py
+```
+
 **Python Notebook**
 ```bash
-pip install pandas numpy matplotlib seaborn jupyter
+pip install pandas numpy matplotlib seaborn scikit-learn jupyter
 jupyter notebook analysis.ipynb
 ```
 
