@@ -6,7 +6,7 @@ An end-to-end data analytics project exploring the Saudi Arabian job market usin
 
 ## Dashboard Preview
 
-![Jadarat Dashboard](src/dashboard.png)
+![Jadarat Dashboard](src/dashboard_preview.png)
 
 > **Key Metrics at a Glance**
 >
@@ -28,7 +28,7 @@ jadaratData/
 │   ├── processed_dataset.csv   # final dataset
 │   └── saudi_jobs_cleaned.csv  # intermediate dataset
 ├── src/
-│   └── dashboard.png           # dashboard screenshot
+│   └── dashboard_preview.png   # dashboard screenshot
 ├── analysis.ipynb              # EDA notebook
 ├── jadaratDashboard.pbix       # Power BI dashboard
 └── README.md
