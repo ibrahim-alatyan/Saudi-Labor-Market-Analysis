@@ -10,6 +10,7 @@
 [![Power BI](https://img.shields.io/badge/Power%20BI-Dashboard-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)](https://powerbi.microsoft.com/)
 [![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)](https://pandas.pydata.org/)
 [![scikit-learn](https://img.shields.io/badge/scikit--learn-ML-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white)](https://scikit-learn.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-API-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 [![Kaggle](https://img.shields.io/badge/Dataset-Kaggle-20BEFF?style=for-the-badge&logo=kaggle&logoColor=white)](https://www.kaggle.com/datasets/shaykhaaldawsari/jadarat-cleaned-data-csv?resource=download)
 [![Status](https://img.shields.io/badge/Status-Completed-2ea44f?style=for-the-badge)]()
 
@@ -19,7 +20,7 @@
 
 ## Overview
 
-An end-to-end data analytics project exploring the Saudi Arabian job market using listings sourced from the **Jadarat** (جدارات) platform. The project covers data cleaning, exploratory data analysis (EDA), salary prediction using machine learning, an interactive Power BI dashboard, and a deployed Streamlit web app.
+An end-to-end data analytics project exploring the Saudi Arabian job market using listings sourced from the **Jadarat** (جدارات) platform. The project covers data cleaning, exploratory data analysis (EDA), salary prediction using machine learning, an interactive Power BI dashboard, a Streamlit web app, and a REST API built with FastAPI.
 
 ---
 
@@ -74,6 +75,7 @@ jadaratData/
 │   └── interface.png           # web app screenshot
 ├── analysis.ipynb              # EDA & ML notebook
 ├── app.py                      # Streamlit salary predictor
+├── api.py                      # FastAPI REST endpoint
 ├── model.pkl                   # trained Random Forest pipeline
 ├── jadaratDashboard.pbix       # Power BI dashboard
 └── README.md
@@ -175,6 +177,7 @@ Trained and compared 3 regression models to predict employee salary in SAR.
 | Matplotlib · Seaborn | Exploratory visualizations |
 | scikit-learn | Machine learning models |
 | Streamlit | Interactive salary predictor web app |
+| FastAPI | REST API for salary prediction |
 | Power BI | Interactive dashboard |
 
 ---
@@ -185,6 +188,32 @@ Trained and compared 3 regression models to predict employee salary in SAR.
 ```bash
 pip install streamlit pandas scikit-learn
 streamlit run app.py
+```
+
+**FastAPI — Salary Prediction Endpoint**
+```bash
+pip install fastapi uvicorn pandas scikit-learn
+uvicorn api:app --reload
+```
+
+`POST /predict` — Request body:
+```json
+{
+  "region": "Riyadh",
+  "eco_activity": "Technology and Communications",
+  "city": "AR RIYADH",
+  "comp_size": "MA",
+  "job_title": "Analyst",
+  "exper": 10,
+  "comp_type": 1
+}
+```
+
+Response:
+```json
+{
+  "predicted_salary": 16560.00
+}
 ```
 
 **Python Notebook**

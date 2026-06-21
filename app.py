@@ -2,7 +2,10 @@ import streamlit as st
 import pandas as pd
 import pickle
 from sklearn.pipeline import Pipeline
+from fastapi import FastAPI
 
+
+app = FastAPI()
 
 df = pd.read_csv('data/saudi_jobs_cleaned.csv')
 
